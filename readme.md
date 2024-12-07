@@ -36,5 +36,5 @@ To run index.ts
 # Run this if you don't have ts-node installed yet
 # npm install -g ts-node
 
-ts-node index.js
+ts-node index.ts
 ```
