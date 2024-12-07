@@ -33,6 +33,8 @@ node index.js
 To run index.ts
 
 ```
-npm install -g ts-node
+# Run this if you don't have ts-node installed yet
+# npm install -g ts-node
+
 ts-node index.js
 ```
