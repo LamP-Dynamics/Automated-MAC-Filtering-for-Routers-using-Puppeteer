@@ -44,13 +44,13 @@ ts-node index.ts
 Create a `.env` file in the root directory of your project and add the following environment variables:
 
 ```
-ADMIN_PASS=your_admin_password
-PRIVILEGED=mac1-mac2-mac3
+ADMIN_PASS=your_admin_password	# Used for all routers
+PRIVILEGED=mac1---mac2---mac3		# For example -> 5c:bb:12:ae:24:22---5a:bc:13:aa:2c:2f
 DIR605_URL=http://192.168.0.1  	# Desired URL for DIR605L Router
 WR840N_URL=http://192.168.3.1  	# Desired URL for WR840N Router
 ```
 
-Replace `your_admin_password` with the actual admin password of your router and `mac1-mac2-mac3` with the MAC addresses that should be privileged. Update the URLs to match your router's IP addresses. Please not that currently in this release version the password of each router is equal.
+Replace `your_admin_password` with the actual admin password of your router and `mac1---mac2---mac3` with the MAC addresses that should be privileged. Update the URLs to match your router's IP addresses. Please not that currently in this release version the password of each router is equal.
 
 ## License
 
