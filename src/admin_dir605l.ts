@@ -4,7 +4,7 @@ import { ADMIN_PASS, click, Data, PRIVILEGED, puppet, sendLog } from "./utils";
 const added = []
 const deleted = []
 
-export const admin_dir605l = async (ip:string, browser: Browser, fetched: Data[]) => {
+export const DIR605l = async (ip:string, browser: Browser, fetched: Data[]) => {
 	sendLog('Starting...');
 	const page = await browser.newPage();
 	await page.goto(ip);

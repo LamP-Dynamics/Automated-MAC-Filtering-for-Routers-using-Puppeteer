@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
-import { admin_dir605l } from "./src/admin_dir605l";
 import { sendLog } from "./src/utils";
+import * as admin from "./src"
 
 (async () => {
   // Dummy datas
@@ -28,7 +28,7 @@ import { sendLog } from "./src/utils";
         headless: false, 
         executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' 
       });
-      await admin_dir605l("http://192.168.0.1", browser, fetched)
+      await admin.DIR605l("http://192.168.0.1", browser, fetched)
       // await admin_wr840n("192.168.3.1", browser, fetched)
       await browser.close();
       trial--;
