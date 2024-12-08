@@ -1,7 +1,6 @@
 import puppeteer from "puppeteer";
 import { admin_dir605l } from "./src/admin_dir605l";
 import { sendLog } from "./src/utils";
-import { admin_wr840n } from "./admin_wr840n";
 
 (async () => {
   // Dummy datas
