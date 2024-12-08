@@ -105,4 +105,5 @@ export const admin_168_0_1 = async (browser: Browser) => {
 	
 	// Take a screenshot of the page
 	await page.screenshot({ path: './dev/192.168.0.1-debug-screenshot.png' });
+	await page.close();
 }
