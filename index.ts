@@ -1,6 +1,7 @@
 import puppeteer from "puppeteer";
-import { admin_dir605l } from "./admin_dir605l";
-import { sendLog } from "./utils";
+import { admin_dir605l } from "./src/admin_dir605l";
+import { sendLog } from "./src/utils";
+import { admin_wr840n } from "./admin_wr840n";
 
 (async () => {
   // Dummy datas
@@ -24,8 +25,12 @@ import { sendLog } from "./utils";
   let trial = 0;
   while (trial >= 0) {
     try {
-      const browser = await puppeteer.launch({ headless: true });
-      await admin_dir605l("192.168.0.1", browser, fetched)
+      const browser = await puppeteer.launch({ 
+        headless: false, 
+        executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' 
+      });
+      await admin_dir605l("http://192.168.0.1", browser, fetched)
+      // await admin_wr840n("192.168.3.1", browser, fetched)
       await browser.close();
       trial--;
     }
