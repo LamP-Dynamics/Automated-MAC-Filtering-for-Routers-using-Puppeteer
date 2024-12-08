@@ -22,11 +22,12 @@ You also able to use the source code I provided. You can freely customize the co
 
 ## How To Use
 
-Since this project was made using TS, there are two runtimes (TS and JS). You can run any of them and running the Typescript runtime will require you to install `ts-node` to be able to run Typescript directly.
+Since this project was made using TS, there are two runtimes (TS and JS). You can run any of them and running the Typescript runtime will require you to install `ts-node` to be able to run Typescript directly while you can just using the latest released version in the [release page](https://github.com/SalamPS/puppet-mac-filter/releases)
 
 To run index.js
 
 ```
+npm install
 node index.js
 ```
 
@@ -36,6 +37,7 @@ To run index.ts
 # Run this if you don't have ts-node installed yet
 # npm install -g ts-node
 
+npm install
 ts-node index.ts
 ```
 
