@@ -1,3 +1,4 @@
+import puppeteer from "puppeteer";
 import { admin_168_0_1 } from "./168_0_1";
 import { sendLog } from "./utils";
 
@@ -5,7 +6,10 @@ import { sendLog } from "./utils";
   let trial = 0;
   while (trial >= 0) {
     try {
-      await admin_168_0_1()
+      const browser = await puppeteer.launch({ headless: true });
+      await admin_168_0_1(browser)
+      
+      await browser.close();
       trial = -1;
     }
     catch (err) {

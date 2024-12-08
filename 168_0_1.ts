@@ -1,9 +1,8 @@
-import puppeteer from "puppeteer";
+import { Browser } from "puppeteer";
 import { ADMIN_PASS, Data, PRIVILEGED, puppet, sendLog } from "./utils";
 
-export const admin_168_0_1 = async () => {
+export const admin_168_0_1 = async (browser: Browser) => {
 	sendLog('Starting...');
-	const browser = await puppeteer.launch({ headless: true });
 	const page = await browser.newPage();
 	await page.goto('http://192.168.0.1');
 	
@@ -106,5 +105,4 @@ export const admin_168_0_1 = async () => {
 	
 	// Take a screenshot of the page
 	await page.screenshot({ path: './dev/screenshot.png' });
-	await browser.close();
 }
