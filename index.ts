@@ -24,17 +24,25 @@ import * as admin from "./src"
   let trial = 0;
   while (trial >= 0) {
     try {
-      const ADMIN_URL  = process.env.ADMIN_URL
-      if (ADMIN_URL) {
+      const DIR605_URL  = process.env.DIR605_URL
+      const WR840N_URL   = process.env.WR840N_URL
+
+      if (DIR605_URL || WR840N_URL) {
         const browser = await puppeteer.launch({ 
           headless: false, 
           executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' 
         });
-        await admin.DIR605l(ADMIN_URL, browser, fetched)
+
+        if (DIR605_URL) await admin.DIR605l(DIR605_URL, browser, fetched)
+
+        //// Currently in development
+        // if (WR840N_URL) await admin.WR840N(WR840N_URL, browser, fetched)
+
         await browser.close();
+        sendLog("Exiting app...")
         trial--;
       }
-      else throw new Error('ADMIN_URL not found in .env file')
+      else throw new Error('No {ADMIN}_URL found in .env file')
     }
     catch (err) {
       sendLog(err + `\nFailed. Retrying for ${trial} time...`)

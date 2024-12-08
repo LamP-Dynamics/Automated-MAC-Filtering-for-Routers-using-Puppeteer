@@ -1,1 +1,1 @@
-export * from './admin_dir605l';
+export * from './router/dir605l';
