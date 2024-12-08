@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "npx tsc index.ts"
+    "build": "npx tsc && copy package.json dist"
   },
   "devDependencies": {
     "typescript": "^5.7.2"
