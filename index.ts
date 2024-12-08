@@ -24,13 +24,17 @@ import * as admin from "./src"
   let trial = 0;
   while (trial >= 0) {
     try {
-      const browser = await puppeteer.launch({ 
-        headless: false, 
-        executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' 
-      });
-      await admin.DIR605l("http://192.168.0.1", browser, fetched)
-      await browser.close();
-      trial--;
+      const ADMIN_URL  = process.env.ADMIN_URL
+      if (ADMIN_URL) {
+        const browser = await puppeteer.launch({ 
+          headless: false, 
+          executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' 
+        });
+        await admin.DIR605l(ADMIN_URL, browser, fetched)
+        await browser.close();
+        trial--;
+      }
+      else throw new Error('ADMIN_URL not found in .env file')
     }
     catch (err) {
       sendLog(err + `\nFailed. Retrying for ${trial} time...`)
