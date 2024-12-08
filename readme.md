@@ -38,3 +38,18 @@ To run index.ts
 
 ts-node index.ts
 ```
+
+## Configuration
+
+Create a `.env` file in the root directory of your project and add the following environment variables:
+
+```
+ADMIN_PASS=your_admin_password
+PRIVILEGED=mac1-mac2-mac3
+```
+
+Replace `your_admin_password` with the actual admin password of your router and `mac1-mac2-mac3` with the MAC addresses that should be privileged.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

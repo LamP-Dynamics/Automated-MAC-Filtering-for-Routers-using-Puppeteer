@@ -1,5 +1,5 @@
 import puppeteer from "puppeteer";
-import { admin_168_0_1 } from "./168_0_1";
+import { admin_dir605l } from "./admin_dir605l";
 import { sendLog } from "./utils";
 
 (async () => {
@@ -25,14 +25,13 @@ import { sendLog } from "./utils";
   while (trial >= 0) {
     try {
       const browser = await puppeteer.launch({ headless: true });
-      await admin_168_0_1(browser, fetched)
-      
+      await admin_dir605l("192.168.0.1", browser, fetched)
       await browser.close();
-      trial = -1;
+      trial--;
     }
     catch (err) {
-      trial+=1
       sendLog(err + `\nFailed. Retrying for ${trial} time...`)
+      trial++
     }
   }
 })();

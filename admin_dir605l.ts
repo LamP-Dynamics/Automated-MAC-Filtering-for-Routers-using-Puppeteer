@@ -4,10 +4,10 @@ import { ADMIN_PASS, click, Data, PRIVILEGED, puppet, sendLog } from "./utils";
 const added = []
 const deleted = []
 
-export const admin_168_0_1 = async (browser: Browser, fetched: Data[]) => {
+export const admin_dir605l = async (ip:string, browser: Browser, fetched: Data[]) => {
 	sendLog('Starting...');
 	const page = await browser.newPage();
-	await page.goto('http://192.168.0.1');
+	await page.goto(ip);
 	
 	// Login to the router
 	await puppet(page, async () => {
