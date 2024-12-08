@@ -29,7 +29,6 @@ import * as admin from "./src"
         executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' 
       });
       await admin.DIR605l("http://192.168.0.1", browser, fetched)
-      // await admin_wr840n("192.168.3.1", browser, fetched)
       await browser.close();
       trial--;
     }
