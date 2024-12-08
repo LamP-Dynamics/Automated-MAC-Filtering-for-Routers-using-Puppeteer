@@ -2,10 +2,10 @@
   <h1>Automated MAC Filtering for Routers using NodeJS and Puppeteer based on Client Payment Status</h1>
 
 <a href="https://www.typescriptlang.org/">
-	<img alt="License" src="https://img.shields.io/badge/Typescript-3776AB?style=for-the-badge&logo=typescript&logoColor=white">
+    <img alt="License" src="https://img.shields.io/badge/Typescript-3776AB?style=for-the-badge&logo=typescript&logoColor=white">
 </a>
 <a href="https://www.nodejs.org/">
-	<img alt="License" src="https://img.shields.io/badge/NodeJS v22.12.0-417e38?style=for-the-badge&logo=nodejs&logoColor=white">
+    <img alt="License" src="https://img.shields.io/badge/NodeJS v22.12.0-417e38?style=for-the-badge&logo=nodejs&logoColor=white">
 </a>
 <a href="https://github.com/SalamPS/puppet-mac-filter/blob/main/LICENSE">
   <img alt="License" src="https://img.shields.io/badge/License-MIT-2cb150?style=for-the-badge&logo=opensourceinitiative&logoColor=white">
@@ -22,12 +22,11 @@ You also able to use the source code I provided. You can freely customize the co
 
 ## How To Use
 
-Since this project was made using TS, there are two runtimes (TS and JS). You can run any of them and running the Typescript runtime will require you to install `ts-node` to be able to run Typescript directly while you can just using the latest released version in the [release page](https://github.com/SalamPS/puppet-mac-filter/releases)
+Since this project was made using TS, there are two runtimes (TS and JS). You can run any of them and running the Typescript runtime will require you to install `ts-node` to be able to run Typescript directly while you can just using the latest released version in the [release page](https://github.com/SalamPS/puppet-mac-filter/releases). Make sure to run `npm install` first before starting the runtime for the first time.
 
 To run index.js
 
 ```
-npm install
 node index.js
 ```
 
@@ -37,7 +36,6 @@ To run index.ts
 # Run this if you don't have ts-node installed yet
 # npm install -g ts-node
 
-npm install
 ts-node index.ts
 ```
 
@@ -48,9 +46,11 @@ Create a `.env` file in the root directory of your project and add the following
 ```
 ADMIN_PASS=your_admin_password
 PRIVILEGED=mac1-mac2-mac3
+DIR605_URL=http://192.168.0.1  	# Desired URL for DIR605L Router
+WR840N_URL=http://192.168.3.1  	# Desired URL for WR840N Router
 ```
 
-Replace `your_admin_password` with the actual admin password of your router and `mac1-mac2-mac3` with the MAC addresses that should be privileged.
+Replace `your_admin_password` with the actual admin password of your router and `mac1-mac2-mac3` with the MAC addresses that should be privileged. Update the URLs to match your router's IP addresses. Please not that currently in this release version the password of each router is equal.
 
 ## License
 
