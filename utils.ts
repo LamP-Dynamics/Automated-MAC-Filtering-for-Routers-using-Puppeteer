@@ -1,4 +1,4 @@
-import { Page } from "puppeteer";
+import { ElementHandle, Page } from "puppeteer";
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -16,4 +16,13 @@ export const puppet = async (page: Page, callback: () => Promise<void>, message:
 export interface Data {
   mac: string;
   name: string;
+  index?: number;
+}
+export const click = async (page: Page | ElementHandle, selector: string):Promise<void> => {
+  const element = await page.$(selector);
+  if (element) {
+    await element.click();
+  } else {
+    throw new Error(`${selector} not found`);
+  }
 }
