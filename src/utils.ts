@@ -3,7 +3,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const ADMIN_PASS = process.env.ADMIN_PASS || '';
-export const PRIVILEGED = process.env.PRIVILEGED?.split('-') || '';
+export const PRIVILEGED = process.env.PRIVILEGED?.split('---') || '';
+export const SPECIALIZE = process.env.SPECIALIZE?.split('---') || [];
 export const sendLog = (message:string | unknown) => {
   console.log('=========================')
   console.log(message)

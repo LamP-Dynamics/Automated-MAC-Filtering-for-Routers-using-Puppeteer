@@ -1,5 +1,5 @@
 import { Browser } from "puppeteer";
-import { ADMIN_PASS, click, Data, PRIVILEGED, puppet, sendLog } from "../utils";
+import { ADMIN_PASS, click, Data, PRIVILEGED, SPECIALIZE, puppet, sendLog } from "../utils";
 
 const added = []
 const deleted = []
@@ -71,7 +71,7 @@ export const DIR605l = async (ip:string, browser: Browser, fetched: Data[]): Pro
 					}
 
 					if (data.mac && data.name) {
-						if (!PRIVILEGED.includes(data.mac)) {
+						if (!PRIVILEGED.includes(data.mac.toLowerCase())) {
 							console.log(`${data.mac} of ${data.name}`);
 							listed.push(data);
 						}
@@ -88,25 +88,66 @@ export const DIR605l = async (ip:string, browser: Browser, fetched: Data[]): Pro
 				}
 			}
 				
-			const toAdd: Data[] = fetched.map(data => listed.find(l => l.mac === data.mac) ? null : data).filter((d): d is Data => d !== null);
-			const toDel: Data[] = listed.filter(data => !fetched.find(f => f.mac === data.mac));
-
+			const toAdd: Data[] = fetched.map(data => listed.find(l => l.mac.toLowerCase() === data.mac.toLowerCase()) ? null : data).filter((d): d is Data => d !== null);
+			const toDel: Data[] = listed.filter(data => !fetched.find(f => f.mac.toLowerCase() === data.mac.toLowerCase()));
+			
 			console.log("Adding: " + toAdd.length + "...");
-			for (const user of toAdd) {
-				const row = empty.shift();
+			const insertUser = async (user: Data, row: Data) => {
 				if (row && row.index) {
 					const input_mac = await page.$(`input[name="mac_addr_${row.index-1}"]`);
 					const input_name = await page.$(`input[name="mac_hostname_${row.index-1}"]`);
 					if (input_mac && input_name) {
 						try {
-							await input_mac.type(user.mac);
+							await input_mac.type(user.mac.toLowerCase());
 							await input_name.type(user.name);
 						} catch (err) {
 							console.error(`Error typing for user ${user.mac}:`, err);
 						}
 					}
 					added.push(user);
-					click(page, `#entry_enable_${row.index-1}`);
+					empty.shift()
+					await click(page, `#entry_enable_${row.index-1}`);
+				}
+			}
+
+			const clickAndWait = async (target: string) => {
+				await click(page, target);
+				await page.waitForNavigation({ waitUntil: 'networkidle0' });
+			}
+
+			for (const user of toAdd) {
+				if (!PRIVILEGED.includes(user.mac.toLowerCase())) {
+					console.log("Adding for: " + user.name);
+					let added = false;
+					let isSpecial = false;
+					const topRow = empty[0];
+					if (topRow && topRow.index) {
+						await page.waitForSelector(`input[name="mac_addr_${topRow.index-1}"]`);
+						await page.waitForSelector(`input[name="mac_hostname_${topRow.index-1}"]`);
+					}
+					for (const special of SPECIALIZE) {
+						if (user.name.toLowerCase().includes(special)) {
+							added = true;
+							isSpecial = true;
+							console.log("- Special: " + user.name);
+							console.log("- Special: " + user.mac);
+							await insertUser(user, topRow);
+							break;
+						}
+					}
+					if (!isSpecial && !user.name.endsWith('2')) {
+						added = true;
+						console.log("- Basic: " + user.name);
+						console.log("- Basic: " + user.mac);
+						await insertUser(user, topRow);
+					}
+					if (added) {
+						await clickAndWait('#SaveSettings');
+						await clickAndWait('#RestartLater');
+					}
+					else {
+						console.log('- Not eligible')
+					}
 				}
 			}
 
