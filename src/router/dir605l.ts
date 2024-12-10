@@ -165,7 +165,7 @@ export const DIR605l = async (ip:string, browser: Browser, fetched: Data[]): Pro
 
 	const updated = added.length + deleted.length
 
-	sendLog('Action succesful on 192.168.0.1')
+	sendLog('Action succesful on '+ip)
 	console.log('Added:', added.length, 'user(s)');
 	console.log('Deleted:', deleted.length, 'user(s)');
 

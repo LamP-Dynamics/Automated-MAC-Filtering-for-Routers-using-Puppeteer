@@ -114,7 +114,7 @@ export const WR840N = async (ip:string, browser: Browser, fetched: Data[]): Prom
 		await mainFrame.waitForSelector(navBtn('XL','addnew'));
 		const updated = added.length + deleted.length
 		
-		sendLog('Action succesful on 192.168.3.1')
+		sendLog('Action succesful on '+ip)
 		console.log('Added:', added.length, 'user(s)');
 		console.log('Deleted:', deleted.length, 'user(s)');
 		

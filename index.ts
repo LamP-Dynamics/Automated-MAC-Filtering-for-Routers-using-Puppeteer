@@ -4,10 +4,9 @@ import * as admin from "./src"
 
 (async () => {
   // Dummy datas
-  const fetched:Data[] = []
-
   let trial = 0;
-  while (trial >= 0) {
+  while (trial >= 0 && trial <=5) {
+    const fetched:Data[] = []
     const DIR605_URL = process.env.DIR605_URL
     const WR840N_URL = process.env.WR840N_URL
     const ADMIN_URL  = process.env.ADMIN_URL
@@ -34,9 +33,8 @@ import * as admin from "./src"
       })
       .catch(err => {
         sendLog(err)
-        trial--
+        trial++
       })
-      if (trial < 0) return sendLog('Exiting app...')
 
       sendLog("Opening browser...")
       const browser = await puppeteer.launch({
@@ -54,9 +52,7 @@ import * as admin from "./src"
         sendLog(err + `\nFailed. Retrying for ${trial} time...`)
         trial++
       }
-      if (trial < 0) {
-        return await browser.close()
-      }
+      await browser.close()
     }
     else sendLog('Env variables is not fully required. See our the documentation on github for more information.')
   }
