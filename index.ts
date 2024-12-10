@@ -26,14 +26,14 @@ import * as admin from "./src"
       })
       .then(async res => {
         if (!res.ok) throw new Error('Failed to fetch data from API')
+        sendLog('Collected data from API')
         const data:Data[] = await res.json()
         data.forEach((item:Data) => {
           fetched.push(item)
         })
       })
       .catch(err => {
-        sendLog('Failed to fetch data from API')
-        console.log(err)
+        sendLog(err)
         trial--
       })
       if (trial < 0) return sendLog('Exiting app...')
