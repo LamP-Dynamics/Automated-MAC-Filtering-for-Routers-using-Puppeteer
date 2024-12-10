@@ -6,7 +6,7 @@ export const ADMIN_PASS = process.env.ADMIN_PASS || '';
 export const PRIVILEGED = process.env.PRIVILEGED?.split('---') || '';
 export const SPECIALIZE = process.env.SPECIALIZE?.split('---') || [];
 export const sendLog = (message:string | unknown) => {
-  console.log('=========================')
+  console.log('================================')
   console.log(message)
 }
 export const puppet = async (page: Page, callback: () => Promise<void>, message:string, selector?:string):Promise<void> => {

@@ -1,10 +1,10 @@
 import { Browser } from "puppeteer";
 import { ADMIN_PASS, click, Data, PRIVILEGED, SPECIALIZE, puppet, sendLog } from "../utils";
 
-const added = []
-const deleted = []
-
 export const DIR605l = async (ip:string, browser: Browser, fetched: Data[]): Promise<void> => {
+	const added = []
+	const deleted = []
+
 	sendLog('Starting...');
 	const page = await browser.newPage();
 	await page.goto(ip);
@@ -168,20 +168,19 @@ export const DIR605l = async (ip:string, browser: Browser, fetched: Data[]): Pro
 
 	const updated = added.length + deleted.length
 
+	sendLog('Action succesful on 192.168.0.1')
+	console.log('Added:', added.length, 'user(s)');
+	console.log('Deleted:', deleted.length, 'user(s)');
+
 	if (updated) {
 		await puppet(page, async () => {
 			click(page, '#RestartNow');
 		}, 'Restarting router...');
 
 		await puppet(page, async () => {
-			console.log('Added:', added.length, 'user(s)');
-			console.log('Deleted:', deleted.length, 'user(s)');
-		}, 'Action succesful on 192.168.0.1');
+		}, `${updated} changes saved...`);
 	}
-	else console.log('No changes needed. Exiting...');
+	else sendLog('No changes needed. Exiting...');
 	
-	// Take a screenshot of the page
-	// await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-	// await page.screenshot({ path: './dev/192.168.0.1-debug.png' });
 	await page.close();
 }

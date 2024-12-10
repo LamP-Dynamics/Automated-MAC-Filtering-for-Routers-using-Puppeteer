@@ -1,10 +1,10 @@
 import { Browser, ElementHandle } from "puppeteer";
 import { ADMIN_PASS, click, Data, PRIVILEGED, puppet, sendLog } from "../utils";
 
-const added: Data[] = []
-const deleted: Data[] = []
-
 export const WR840N = async (ip:string, browser: Browser, fetched: Data[]): Promise<void> => {
+	const added: Data[] = []
+	const deleted: Data[] = []
+
 	sendLog('Starting...');
 	const page = await browser.newPage();
 	await page.goto(ip);
@@ -73,6 +73,7 @@ export const WR840N = async (ip:string, browser: Browser, fetched: Data[]): Prom
 		const navBtn = (size:string,info:string) => {return `input.button.${size}.T.T_${info}`}
 		await (async () => {
 			for (const user of toAdd) {
+				console.log(`Adding ${user.mac} of ${user.name}`);
 				if (!PRIVILEGED.includes(user.mac.toLowerCase()))  {
 					await mainFrame.waitForSelector(navBtn('XL','addnew'));
 					await click(mainFrame, navBtn('XL','addnew'))
@@ -96,30 +97,31 @@ export const WR840N = async (ip:string, browser: Browser, fetched: Data[]): Prom
 		})()
 
 		console.log("Deleting: " + toDel.length + "...");
-		await (async () => {
-			await mainFrame.waitForSelector(navBtn('XL','delsel'));
 
-			const table = await mainFrame.$('#macTbl');
-			if (!table) throw new Error('Failed to locate the MAC filtering list');
-			const rows = await table.$$('tr');
+		await mainFrame.waitForSelector(navBtn('XL','delsel'));
+		if (!table) throw new Error('Failed to locate the MAC filtering list');
+		const delRows = await table.$$('tr');
 
-			for (const user of toDel) {
-				if (user.index) {
-					const row = rows[user.index];
-					const cells = await row.$$('td');
-					await cells[0].click()
-				}
+		for (const user of toDel) {
+			if (user.index) {
+				const row = delRows[user.index];
+				const cells = await row.$$('td');
+				await cells[0].click()
 			}
-
-			await click(mainFrame, navBtn('XL','delsel'));
-		})()
-
-		const updated = added.length + deleted.length
-		if (updated) {
-			console.log("Saving: " + updated + " changes...");
-			click(page, '#SaveSettings');
 		}
+		await click(mainFrame, navBtn('XL','delsel'));
+
+		await mainFrame.waitForSelector(navBtn('XL','addnew'));
+		const updated = added.length + deleted.length
+		
+		sendLog('Action succesful on 192.168.3.1')
+		console.log('Added:', added.length, 'user(s)');
+		console.log('Deleted:', deleted.length, 'user(s)');
+		
+		if (updated) sendLog(`${updated} changes saved...`);
+		else sendLog('No changes needed. Exiting...');
+		
 	}, 'Updating MAC filtering list...');
 	
-	// await page.close();
+	await page.close();
 }
