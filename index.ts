@@ -45,7 +45,7 @@ import * as admin from "./src"
       })
 
       try {
-        // if (DIR605_URL) await admin.DIR605l(DIR605_URL, browser, fetched)
+        if (DIR605_URL) await admin.DIR605l(DIR605_URL, browser, fetched)
         if (WR840N_URL) await admin.WR840N(WR840N_URL, browser, fetched)
         sendLog("Exiting app...")
         trial--;
