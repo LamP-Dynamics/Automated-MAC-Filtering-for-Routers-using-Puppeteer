@@ -157,10 +157,7 @@ export const DIR605l = async (ip:string, browser: Browser, fetched: Data[]): Pro
 			}
 
 			const updated = added.length + deleted.length
-			if (updated) {
-				console.log("Saving: " + updated + " changes...");
-				click(page, '#SaveSettings');
-			}
+			if (updated) click(page, '#SaveSettings');
 		} else {
 			throw new Error('Table with class formlisting not found');
 		}
