@@ -14,7 +14,7 @@
 
 ## What It Does
 
-We made this automation system in the need of my responsibility as an Admin of my local network. We need to ensure that only client who already paid the internet bill that able to access the local network. The plan is by using Whitelist MAC Filtering.
+We made this automation system in the need of our responsibility as an Admin of our local network. We need to ensure that only client who already paid the internet bill that able to access the local network. The plan is by using Whitelist MAC Filtering.
 
 We have plenty other things to do beside of this simply lovely stuff. Rather than doing all the filtering things manually everyday, we prefer to made this automation to let me chill out without any need of care about the filtering anymore.
 
